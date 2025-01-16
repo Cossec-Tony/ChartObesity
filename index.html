@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taux de décès liés à l'obésité</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img class="sauce-img sauce-left" src="./style/img/mayo.svg" alt="Mayo">
+            <div class="title-container">
+                <h1>TAUX DE DÉCÈS<br>LIÉS À L'OBÉSITÉ</h1>
+                <h5>Source : IHME, Global Burden of Disease (2024)</h5>
+            </div>
+            <img class="sauce-img sauce-right" src="./style/img/ketchup.svg" alt="Ketchup">
+        </div>
+        <div class="fries-container">
+            <img class="fries-img" src="./style/img/bolDeFrite.png" alt="Frites">
+        </div>
+    </header>
+
+    <section class="flags-section">
+        <img class="flag" src="./style/img/US.jpg" alt="USA">
+        <img class="flag" src="./style/img/france.jpg" alt="France">
+        <img class="flag" src="./style/img/fiji.png" alt="Fiji">
+        <img class="flag" src="./style/img/japon.webp" alt="Japan">
+        <img class="flag" src="./style/img/angleterre.jpg" alt="UK">
+    </section>
+
+    <div class="chart-container">
+        <h2 id="countryName">Sélectionnez un pays</h2>
+        <canvas id="obesityChart"></canvas>
+    </div>
+
+    <footer>feur</footer>
+</body>
+
+<script>
+    let currentChart = null;
+    
+    function generateRandomData(min, max) {
+        return Array.from({length: 6}, () => 
+            Math.floor(Math.random() * (max - min + 1)) + min
+        );
+    }
+    
+    const countryData = {
+        USA: {
+            label: 'États-Unis',
+            data: {
+                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                datasets: [{
+                    label: 'Taux de décès',
+                    data: generateRandomData(70, 90),
+                    backgroundColor: '#0074D9'
+                }]
+            }
+        },
+        France: {
+            label: 'France',
+            data: {
+                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                datasets: [{
+                    label: 'Taux de décès',
+                    data: generateRandomData(50, 70),
+                    backgroundColor: '#FF4136'
+                }]
+            }
+        },
+        Fiji: {
+            label: 'Fidji',
+            data: {
+                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                datasets: [{
+                    label: 'Taux de décès',
+                    data: generateRandomData(40, 60),
+                    backgroundColor: '#2ECC40'
+                }]
+            }
+        },
+        Japan: {
+            label: 'Japon',
+            data: {
+                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                datasets: [{
+                    label: 'Taux de décès',
+                    data: generateRandomData(20, 40),
+                    backgroundColor: '#FF851B'
+                }]
+            }
+        },
+        UK: {
+            label: 'Royaume-Uni',
+            data: {
+                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                datasets: [{
+                    label: 'Taux de décès',
+                    data: generateRandomData(60, 80),
+                    backgroundColor: '#B10DC9'
+                }]
+            }
+        }
+    };
+
+    const baseConfig = {
+        type: 'bar',
+        options: {
+            responsive: true,
+            animation: {
+                duration: 1000,
+                easing: 'easeInOutQuart'
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Taux de décès pour 100,000 habitants'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    function updateChart(country) {
+        const countryInfo = countryData[country];
+        
+   
+        document.getElementById('countryName').textContent = countryInfo.label;
+        document.getElementById('countryName').style.animation = 'none';
+        document.getElementById('countryName').offsetHeight;
+        document.getElementById('countryName').style.animation = 'fadeInUp 0.8s forwards';
+
+        
+        if (currentChart) {
+            currentChart.destroy();
+        }
+
+    
+        const ctx = document.getElementById('obesityChart').getContext('2d');
+        currentChart = new Chart(ctx, {
+            ...baseConfig,
+            data: countryInfo.data
+        });
+
+  
+        document.querySelectorAll('.flag').forEach(flag => {
+            flag.classList.remove('active');
+            if (flag.alt === country) {
+                flag.classList.add('active');
+            }
+        });
+    }
+
+
+    document.querySelectorAll('.flag').forEach((flag, index) => {
+        flag.style.animation = `flagAppear 0.5s forwards ${index * 0.2}s`;
+        flag.addEventListener('click', () => updateChart(flag.alt));
+    });
+
+
+    setTimeout(() => {
+        updateChart('USA');
+    }, 1000);
+</script>
+
+
+</html>
