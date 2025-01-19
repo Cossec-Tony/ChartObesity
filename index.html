@@ -38,15 +38,31 @@
     <section style="display: flex; align-items: center; padding-right: 140px; padding-left: 50px;">
         <img class="poster" src="./style/img/Poster_Datalogy-COSSEC-EL_HADEDI-LEBRETON-URBAN-MMI_2B1-SAE_3.03.jpg" alt="">
 
-        <p>
+        <p class="texte">
         Quoi ?
         Un graphique visuel utilisant des frites et du ketchup pour illustrer les données statistiques. Cette image est conçue pour surprendre et marquer les esprits, tout en étant accessible et compréhensible.
-        Comment ?
-        Données : Issues de la plateforme "Our World in Data" (Sources de Our World in Data : IHME, Global Burden of Disease (2024)), mettant en évidence les décès liés à un IMC supérieur ou égal à 30.
+        Comment ? <br>
+        Données : Issues de la plateforme "Our World in Data" Sources de Our World in Data : IHME, Global Burden of Disease (2024), mettant en évidence les décès liés à un IMC supérieur ou égal à 30.
         Représentation : Utilisation de la nourriture comme métaphore visuelle.
         Message : Faire le lien entre les habitudes alimentaires (ex. : consommation d'aliments ultra-transformés) et les impacts sur la santé globale.
         </p>
     </section>
+
+    <section class="Quizz">
+        <div class="quiz-container">
+            <div class="question-container">
+                <h2 id="current-question"></h2>
+            </div>
+            <div class="burger-section" id="burger-options"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="next-button" id="next-button">Question suivante</button>
+            <div class="score-container" id="score-container">
+                <div class="score-text">Votre score : <span id="final-score"></span>/5</div>
+                <div class="result-message" id="result-message"></div>
+            </div>
+        </div>
+    </section>
+
     
 
     <footer>feur</footer>
@@ -189,6 +205,144 @@
     setTimeout(() => {
         updateChart('USA');
     }, 1000);
+
+
+    const questions = [
+    {
+        question: "Quel était le taux de mortalité attribué à l'obésité en Angleterre en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "45,6", correct: false },
+            { text: "57,8", correct: true },
+            { text: "68,9", correct: false },
+            { text: "79,4", correct: false }
+        ]
+    },
+    {
+        question: "Parmi les catégories de pays suivantes, laquelle avait le taux de mortalité le plus élevé dû à l'obésité en 2019 ?",
+        answers: [
+            { text: "Pays à revenu faible", correct: false },
+            { text: "Pays à revenu intermédiaire inférieur", correct: false },
+            { text: "Pays à revenu intermédiaire supérieur", correct: false },
+            { text: "Pays à revenu élevé", correct: true }
+        ]
+    },
+    {
+        question: "Quel était le taux de mortalité dû à l'obésité dans les pays à revenu élevé en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "27,5", correct: false },
+            { text: "35,2", correct: false },
+            { text: "46,3", correct: true },
+            { text: "52,1", correct: false }
+        ]
+    },
+    {
+        question: "Dans quelle catégorie de revenus observe-t-on le plus grand écart entre le taux de mortalité dû à l'obésité et la moyenne mondiale ?",
+        answers: [
+            { text: "Pays à revenu faible", correct: false },
+            { text: "Pays à revenu intermédiaire inférieur", correct: false },
+            { text: "Pays à revenu intermédiaire supérieur", correct: false },
+            { text: "Pays à revenu élevé", correct: true }
+        ]
+    },
+    {
+        question: "Quel était le taux de mortalité mondial attribué à l'obésité en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "21,5", correct: false },
+            { text: "28,9", correct: true },
+            { text: "35,4", correct: false },
+            { text: "42,7", correct: false }
+        ]
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answerSelected = false;
+
+function displayQuestion(questionIndex) {
+    const question = questions[questionIndex];
+    document.getElementById('current-question').textContent = question.question;
+    
+    const burgerSection = document.getElementById('burger-options');
+    burgerSection.innerHTML = '';
+    
+    question.answers.forEach((answer, index) => {
+        const burgerHtml = `
+            <div class="burger-container" data-index="${index}">
+                <img class="burger-top" src="./style/img/painHaut.svg" alt="Top bun">
+                <div class="burger-answer">${answer.text}</div>
+                <img class="burger-bottom" src="./style/img/painBas.svg" alt="Bottom bun">
+            </div>
+        `;
+        burgerSection.innerHTML += burgerHtml;
+    });
+
+    document.querySelectorAll('.burger-container').forEach(burger => {
+        burger.addEventListener('click', handleAnswer);
+    });
+
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('next-button').style.display = 'none';
+    answerSelected = false;
+}
+
+function handleAnswer(event) {
+    if (answerSelected) return;
+    
+    const selectedBurger = event.currentTarget;
+    const selectedIndex = parseInt(selectedBurger.dataset.index);
+    const correct = questions[currentQuestion].answers[selectedIndex].correct;
+    
+    answerSelected = true;
+    selectedBurger.classList.add('selected');
+    selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
+    
+    const feedback = document.getElementById('feedback');
+    if (correct) {
+        feedback.textContent = "Correct ! 🎉";
+        score++;
+    } else {
+        const correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
+        feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
+    }
+    
+    document.getElementById('next-button').style.display = 'block';
+}
+
+document.getElementById('next-button').addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion(currentQuestion);
+    } else {
+        showFinalScore();
+    }
+});
+
+function showFinalScore() {
+    document.querySelector('.question-container').style.display = 'none';
+    document.querySelector('.burger-section').style.display = 'none';
+    document.querySelector('.feedback').style.display = 'none';
+    document.querySelector('.next-button').style.display = 'none';
+    
+    const scoreContainer = document.getElementById('score-container');
+    const finalScore = document.getElementById('final-score');
+    const resultMessage = document.getElementById('result-message');
+    
+    scoreContainer.style.display = 'block';
+    finalScore.textContent = score;
+    
+    if (score >= 4) {
+        resultMessage.textContent = "Félicitations ! Vous êtes un expert dans le domaine ! 🏆";
+    } else if (score >= 2) {
+        resultMessage.textContent = "Pas mal ! Continuez d'apprendre sur ce sujet important.";
+    } else {
+        resultMessage.textContent = "Vous avez perdu ! Réessayez !";
+    }
+}
+
+displayQuestion(0);
+
+
 </script>
 
 
