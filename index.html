@@ -343,20 +343,16 @@ function showFinalScore() {
     const scoreContainer = document.getElementById('score-container');
     const finalScore = document.getElementById('final-score');
     const resultMessage = document.getElementById('result-message');
-    const gif1 = document.getElementById('result-gif');
     
     scoreContainer.style.display = 'block';
     finalScore.textContent = score;
     
     if (score >= 4) {
         resultMessage.textContent = "Félicitations ! Vous êtes un expert dans le domaine ! 🏆";
-        gif1.innerHTML = '<img src="./img/maigre jdg danse.gif">';
     } else if (score >= 3) {
         resultMessage.textContent = "Pas mal !";
-        gif1.innerHTML = '<img src="./img/maigre jdg danse.gif" alt="Pas mal GIF">';
     } else {
         resultMessage.textContent = "Vous avez perdu !";
-        gif1.innerHTML = '<img src="./img/gros jdrage.gif" alt="Perdu GIF">';
     }
 }
 
