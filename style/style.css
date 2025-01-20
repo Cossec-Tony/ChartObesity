@@ -226,6 +226,9 @@ footer {
     font-size: 1.4em;
 }
 
+#titleposter{
+    color: black;
+}
 .datalogy{
     display: flex;
     align-items: center;
