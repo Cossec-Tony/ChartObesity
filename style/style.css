@@ -227,6 +227,7 @@ footer {
 }
 
 #titleposter{
+    text-align: center;
     color: black;
     margin-top: 100px;
     margin-bottom: 50px;
