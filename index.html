@@ -59,6 +59,8 @@
             </div>
             <div class="burger-section" id="burger-options"></div>
             <div class="feedback" id="feedback"></div>
+            <button class="validate-button" id="validate-button">Valider la réponse</button>
+            <button class="next-button" id="next-button">Question suivante</button>
             <button class="next-button" id="next-button">Question suivante</button>
             <div class="score-container" id="score-container">
                 <div class="score-text">Votre score : <span id="final-score"></span>/5</div>
@@ -274,6 +276,7 @@
 let currentQuestion = 0;
 let score = 0;
 let answerSelected = false;
+let selectedBurgerIndex = null;
 
 function displayQuestion(questionIndex) {
     const question = questions[questionIndex];
@@ -294,25 +297,43 @@ function displayQuestion(questionIndex) {
     });
 
     document.querySelectorAll('.burger-container').forEach(burger => {
-        burger.addEventListener('click', handleAnswer);
+        burger.addEventListener('click', selectAnswer);
     });
 
     document.getElementById('feedback').textContent = '';
     document.getElementById('next-button').style.display = 'none';
+    document.getElementById('validate-button').style.display = 'none';
     answerSelected = false;
+    selectedBurgerIndex = null;
 }
 
-function handleAnswer(event) {
+function selectAnswer(event) {
     if (answerSelected) return;
     
+    // Remove selection from other burgers
+    document.querySelectorAll('.burger-container').forEach(burger => {
+        burger.classList.remove('selected');
+    });
+    
     const selectedBurger = event.currentTarget;
-    const selectedIndex = parseInt(selectedBurger.dataset.index);
-    const correct = questions[currentQuestion].answers[selectedIndex].correct;
+    selectedBurger.classList.add('selected');
+    selectedBurgerIndex = parseInt(selectedBurger.dataset.index);
+    
+    // Show validate button
+    document.getElementById('validate-button').style.display = 'block';
+}
+
+function validateAnswer() {
+    if (selectedBurgerIndex === null) return;
     
     answerSelected = true;
-    selectedBurger.classList.add('selected');
+    const selectedBurger = document.querySelector(`.burger-container[data-index="${selectedBurgerIndex}"]`);
+    const correct = questions[currentQuestion].answers[selectedBurgerIndex].correct;
+    
+    // Add correct/incorrect class
     selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
     
+    // Show feedback
     const feedback = document.getElementById('feedback');
     if (correct) {
         feedback.textContent = "Correct ! 🎉";
@@ -322,23 +343,17 @@ function handleAnswer(event) {
         feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
     }
     
+    // Hide validate button and show next button
+    document.getElementById('validate-button').style.display = 'none';
     document.getElementById('next-button').style.display = 'block';
 }
-
-document.getElementById('next-button').addEventListener('click', () => {
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        displayQuestion(currentQuestion);
-    } else {
-        showFinalScore();
-    }
-});
 
 function showFinalScore() {
     document.querySelector('.question-container').style.display = 'none';
     document.querySelector('.burger-section').style.display = 'none';
     document.querySelector('.feedback').style.display = 'none';
     document.querySelector('.next-button').style.display = 'none';
+    document.querySelector('.validate-button').style.display = 'none';
     
     const scoreContainer = document.getElementById('score-container');
     const finalScore = document.getElementById('final-score');
@@ -356,7 +371,18 @@ function showFinalScore() {
     }
 }
 
+// Add event listeners
+document.getElementById('validate-button').addEventListener('click', validateAnswer);
+document.getElementById('next-button').addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion(currentQuestion);
+    } else {
+        showFinalScore();
+    }
+});
 
+// Start the quiz
 displayQuestion(0);
 
 

@@ -537,3 +537,54 @@ footer {
     transform: scale(0.95);
 }
 
+.validate-button {
+    display: none;
+    margin: 0 auto 1rem auto;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: #FF851B;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.validate-button:hover {
+    transform: scale(1.1);
+    background-color: #FF621B;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.validate-button:active {
+    transform: scale(0.95);
+}
+
+/* Modifier le style existant du burger-container pour désactiver l'affichage immédiat de la réponse */
+.burger-container {
+    position: relative;
+    width: 200px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.burger-container.selected {
+    pointer-events: none;
+}
+
+/* Empêcher l'affichage automatique de la réponse correcte/incorrecte au clic */
+.burger-container.selected:not(.validated) {
+    background-color: transparent;
+}
+
+.burger-container.selected:not(.validated) .burger-top {
+    transform: translateY(-40px) rotateX(20deg);
+}
+
+.burger-container.selected:not(.validated) .burger-bottom {
+    transform: translateY(40px) rotateX(-20deg);
+}
+
+.burger-container.selected:not(.validated) .burger-answer {
+    opacity: 1;
+}
