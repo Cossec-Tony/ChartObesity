@@ -70,6 +70,8 @@
             </div>
             <div class="burger-section" id="burger-options"></div>
             <div class="feedback" id="feedback"></div>
+            <button class="validate-button" id="validate-button">Valider la réponse</button>
+            <button class="next-button" id="next-button">Question suivante</button>
             <button class="next-button" id="next-button">Question suivante</button>
             <div class="score-container" id="score-container">
                 <div class="score-text">Votre score : <span id="final-score"></span>/5</div>
@@ -104,62 +106,63 @@
     }
 
     const countryData = {
-        USA: {
-            label: 'États-Unis',
-            data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
-                datasets: [{
-                    label: 'Taux de décès',
-                    data: generateRandomData(70, 90),
-                    backgroundColor: '#0074D9'
-                }]
-            }
-        },
-        France: {
-            label: 'France',
-            data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
-                datasets: [{
-                    label: 'Taux de décès',
-                    data: generateRandomData(50, 70),
-                    backgroundColor: '#FF4136'
-                }]
-            }
-        },
-        Fiji: {
-            label: 'Fidji',
-            data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
-                datasets: [{
-                    label: 'Taux de décès',
-                    data: generateRandomData(40, 60),
-                    backgroundColor: '#2ECC40'
-                }]
-            }
-        },
-        Japan: {
-            label: 'Japon',
-            data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
-                datasets: [{
-                    label: 'Taux de décès',
-                    data: generateRandomData(20, 40),
-                    backgroundColor: '#FF851B'
-                }]
-            }
-        },
-        UK: {
-            label: 'Royaume-Uni',
-            data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
-                datasets: [{
-                    label: 'Taux de décès',
-                    data: generateRandomData(60, 80),
-                    backgroundColor: '#B10DC9'
-                }]
-            }
+    USA: {
+        label: `Taux de prévalence de l'obésité chez les adultes aux États-Unis`,
+        data: {
+            labels: ['1985', '2000', '2015'],
+            datasets: [{
+                label: 'Taux de prévalence de l\'obésité (%)',
+                data: [11.9, 25.5, 36.2],
+                backgroundColor: '#0074D9'
+            }]
         }
-    };
+    },
+    France: {
+        label: `Taux de prévalence de l'obésité chez les adultes en France`,
+        data: {
+            labels: ['1985', '2000', '2015'],
+            datasets: [{
+                label: 'Taux de prévalence de l\'obésité (%)',
+                data: [8.8, 15.8, 21.6],
+                backgroundColor: '#FF4136'
+            }]
+        }
+    },
+    Fiji: {
+        label: `Taux de prévalence de l'obésité chez les adultes au Fidji`,
+        data: {
+            labels: ['1985', '2000', '2015'],
+            datasets: [{
+                label: 'Taux de prévalence de l\'obésité (%)',
+                data: [9.5, 21, 30.2],
+                backgroundColor: '#2ECC40'
+            }]
+        }
+    },
+    Japan: {
+        label: `Taux de prévalence de l'obésité chez les adultes au Japon`,
+        data: {
+            labels: ['1985', '2000', '2015'],
+            datasets: [{
+                label: 'Taux de prévalence de l\'obésité (%)',
+                data: [1, 2.1, 4.3],
+                backgroundColor: '#FF851B'
+            }]
+        }
+    },
+    UK: {
+        label: `Taux de prévalence de l'obésité chez les adultes au Royaume-Uni`,
+        data: {
+            labels: ['1985', '2000', '2015'],
+            datasets: [{
+                label: 'Taux de prévalence de l\'obésité (%)',
+                data: [9.4, 18.6, 27.8],
+                backgroundColor: '#B10DC9'
+            }]
+        }
+    }
+};
+
 
     const baseConfig = {
         type: 'bar',
@@ -174,7 +177,7 @@
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Taux de décès pour 100,000 habitants'
+                        text: 'Taux de prévalence de l\'obésité (%)'
                     }
                 },
                 x: {
@@ -234,139 +237,164 @@
 
 
     const questions = [
-        {
-            question: "Quel était le taux de mortalité attribué à l'obésité en Angleterre en 2019 (par 100 000 habitants) ?",
-            answers: [
-                { text: "45,6", correct: false },
-                { text: "57,8", correct: true },
-                { text: "68,9", correct: false },
-                { text: "79,4", correct: false }
-            ]
-        },
-        {
-            question: "Parmi les catégories de pays suivantes, laquelle avait le taux de mortalité le plus élevé dû à l'obésité en 2019 ?",
-            answers: [
-                { text: "Pays à revenu faible", correct: false },
-                { text: "Pays à revenu intermédiaire inférieur", correct: false },
-                { text: "Pays à revenu intermédiaire supérieur", correct: false },
-                { text: "Pays à revenu élevé", correct: true }
-            ]
-        },
-        {
-            question: "Quel était le taux de mortalité dû à l'obésité dans les pays à revenu élevé en 2019 (par 100 000 habitants) ?",
-            answers: [
-                { text: "27,5", correct: false },
-                { text: "35,2", correct: false },
-                { text: "46,3", correct: true },
-                { text: "52,1", correct: false }
-            ]
-        },
-        {
-            question: "Dans quelle catégorie de revenus observe-t-on le plus grand écart entre le taux de mortalité dû à l'obésité et la moyenne mondiale ?",
-            answers: [
-                { text: "Pays à revenu faible", correct: false },
-                { text: "Pays à revenu intermédiaire inférieur", correct: false },
-                { text: "Pays à revenu intermédiaire supérieur", correct: false },
-                { text: "Pays à revenu élevé", correct: true }
-            ]
-        },
-        {
-            question: "Quel était le taux de mortalité mondial attribué à l'obésité en 2019 (par 100 000 habitants) ?",
-            answers: [
-                { text: "21,5", correct: false },
-                { text: "28,9", correct: true },
-                { text: "35,4", correct: false },
-                { text: "42,7", correct: false }
-            ]
-        }
-    ];
+    {
+        question: "Quel était le taux de mortalité attribué à l'obésité en Angleterre en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "45,6", correct: false },
+            { text: "57,8", correct: true },
+            { text: "68,9", correct: false },
+            { text: "79,4", correct: false }
+        ]
+    },
+    {
+        question: "Parmi les catégories de pays suivantes, laquelle avait le taux de mortalité le plus élevé dû à l'obésité en 2019 ?",
+        answers: [
+            { text: "Pays à revenu faible", correct: false },
+            { text: "Pays à revenu intermédiaire inférieur", correct: false },
+            { text: "Pays à revenu intermédiaire supérieur", correct: false },
+            { text: "Pays à revenu élevé", correct: true }
+        ]
+    },
+    {
+        question: "Quel était le taux de mortalité dû à l'obésité dans les pays à revenu élevé en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "27,5", correct: false },
+            { text: "35,2", correct: false },
+            { text: "46,3", correct: true },
+            { text: "52,1", correct: false }
+        ]
+    },
+    {
+        question: "Dans quelle catégorie de revenus observe-t-on le plus grand écart entre le taux de mortalité dû à l'obésité et la moyenne mondiale ?",
+        answers: [
+            { text: "Pays à revenu faible", correct: false },
+            { text: "Pays à revenu intermédiaire inférieur", correct: false },
+            { text: "Pays à revenu intermédiaire supérieur", correct: false },
+            { text: "Pays à revenu élevé", correct: true }
+        ]
+    },
+    {
+        question: "Quel était le taux de mortalité mondial attribué à l'obésité en 2019 (par 100 000 habitants) ?",
+        answers: [
+            { text: "21,5", correct: false },
+            { text: "28,9", correct: true },
+            { text: "35,4", correct: false },
+            { text: "42,7", correct: false }
+        ]
+    }
+];
 
-    let currentQuestion = 0;
-    let score = 0;
-    let answerSelected = false;
+let currentQuestion = 0;
+let score = 0;
+let answerSelected = false;
+let selectedBurgerIndex = null;
 
-    function displayQuestion(questionIndex) {
-        const question = questions[questionIndex];
-        document.getElementById('current-question').textContent = question.question;
-
-        const burgerSection = document.getElementById('burger-options');
-        burgerSection.innerHTML = '';
-
-        question.answers.forEach((answer, index) => {
-            const burgerHtml = `
+function displayQuestion(questionIndex) {
+    const question = questions[questionIndex];
+    document.getElementById('current-question').textContent = question.question;
+    
+    const burgerSection = document.getElementById('burger-options');
+    burgerSection.innerHTML = '';
+    
+    question.answers.forEach((answer, index) => {
+        const burgerHtml = `
             <div class="burger-container" data-index="${index}">
                 <img class="burger-top" src="./style/img/painHaut.svg" alt="Top bun">
                 <div class="burger-answer">${answer.text}</div>
                 <img class="burger-bottom" src="./style/img/painBas.svg" alt="Bottom bun">
             </div>
         `;
-            burgerSection.innerHTML += burgerHtml;
-        });
-
-        document.querySelectorAll('.burger-container').forEach(burger => {
-            burger.addEventListener('click', handleAnswer);
-        });
-
-        document.getElementById('feedback').textContent = '';
-        document.getElementById('next-button').style.display = 'none';
-        answerSelected = false;
-    }
-
-    function handleAnswer(event) {
-        if (answerSelected) return;
-
-        const selectedBurger = event.currentTarget;
-        const selectedIndex = parseInt(selectedBurger.dataset.index);
-        const correct = questions[currentQuestion].answers[selectedIndex].correct;
-
-        answerSelected = true;
-        selectedBurger.classList.add('selected');
-        selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
-
-        const feedback = document.getElementById('feedback');
-        if (correct) {
-            feedback.textContent = "Correct ! 🎉";
-            score++;
-        } else {
-            const correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
-            feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
-        }
-
-        document.getElementById('next-button').style.display = 'block';
-    }
-
-    document.getElementById('next-button').addEventListener('click', () => {
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            displayQuestion(currentQuestion);
-        } else {
-            showFinalScore();
-        }
+        burgerSection.innerHTML += burgerHtml;
     });
 
-    function showFinalScore() {
-        document.querySelector('.question-container').style.display = 'none';
-        document.querySelector('.burger-section').style.display = 'none';
-        document.querySelector('.feedback').style.display = 'none';
-        document.querySelector('.next-button').style.display = 'none';
+    document.querySelectorAll('.burger-container').forEach(burger => {
+        burger.addEventListener('click', selectAnswer);
+    });
 
-        const scoreContainer = document.getElementById('score-container');
-        const finalScore = document.getElementById('final-score');
-        const resultMessage = document.getElementById('result-message');
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('next-button').style.display = 'none';
+    document.getElementById('validate-button').style.display = 'none';
+    answerSelected = false;
+    selectedBurgerIndex = null;
+}
 
-        scoreContainer.style.display = 'block';
-        finalScore.textContent = score;
+function selectAnswer(event) {
+    if (answerSelected) return;
+    
+    // Remove selection from other burgers
+    document.querySelectorAll('.burger-container').forEach(burger => {
+        burger.classList.remove('selected');
+    });
+    
+    const selectedBurger = event.currentTarget;
+    selectedBurger.classList.add('selected');
+    selectedBurgerIndex = parseInt(selectedBurger.dataset.index);
+    
+    // Show validate button
+    document.getElementById('validate-button').style.display = 'block';
+}
 
-        if (score >= 4) {
-            resultMessage.textContent = "Félicitations ! Vous êtes un expert dans le domaine ! 🏆";
-        } else if (score >= 2) {
-            resultMessage.textContent = "Pas mal ! Continuez d'apprendre sur ce sujet important.";
-        } else {
-            resultMessage.textContent = "Vous avez perdu ! Réessayez !";
-        }
+function validateAnswer() {
+    if (selectedBurgerIndex === null) return;
+    
+    answerSelected = true;
+    const selectedBurger = document.querySelector(`.burger-container[data-index="${selectedBurgerIndex}"]`);
+    const correct = questions[currentQuestion].answers[selectedBurgerIndex].correct;
+    
+    // Add correct/incorrect class
+    selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
+    
+    // Show feedback
+    const feedback = document.getElementById('feedback');
+    if (correct) {
+        feedback.textContent = "Correct ! 🎉";
+        score++;
+    } else {
+        const correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
+        feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
     }
+    
+    // Hide validate button and show next button
+    document.getElementById('validate-button').style.display = 'none';
+    document.getElementById('next-button').style.display = 'block';
+}
 
-    displayQuestion(0);
+function showFinalScore() {
+    document.querySelector('.question-container').style.display = 'none';
+    document.querySelector('.burger-section').style.display = 'none';
+    document.querySelector('.feedback').style.display = 'none';
+    document.querySelector('.next-button').style.display = 'none';
+    document.querySelector('.validate-button').style.display = 'none';
+    
+    const scoreContainer = document.getElementById('score-container');
+    const finalScore = document.getElementById('final-score');
+    const resultMessage = document.getElementById('result-message');
+    
+    scoreContainer.style.display = 'block';
+    finalScore.textContent = score;
+    
+    if (score >= 4) {
+        resultMessage.textContent = "Félicitations ! Vous êtes un expert dans le domaine ! 🏆";
+    } else if (score >= 3) {
+        resultMessage.textContent = "Pas mal !";
+    } else {
+        resultMessage.textContent = "Vous avez perdu !";
+    }
+}
+
+// Add event listeners
+document.getElementById('validate-button').addEventListener('click', validateAnswer);
+document.getElementById('next-button').addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion(currentQuestion);
+    } else {
+        showFinalScore();
+    }
+});
+
+// Start the quiz
+displayQuestion(0);
 
 
 </script>
