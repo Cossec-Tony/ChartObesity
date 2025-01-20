@@ -74,7 +74,7 @@
         <div class="footer-logos">
             <img class="footer-logo" src="./style/img/logos/iut.svg" alt="IUT Lannion">
             <img class="footer-logo" src="./style/img/logos/univ_rennes.svg" alt="Université de Rennes">
-            <img class="footer-logo" src="./style/img/logos/mmi.png" alt="MMI">
+            <img class="footer-logo" src="./style/img/logos/mmi.svg" alt="MMI">
         </div>
         <div class="footer-text">
             <p>Réalisé par : COSSEC Hugo - EL HADEDI Karim - LEBRETON Tom - URBAN Ruben</p>
@@ -95,56 +95,56 @@
     
     const countryData = {
         USA: {
-            label: 'États-Unis',
+            label: `Taux de prévalence de l'obésité chez les adultes aux États-Unis`,
             data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                labels: ['1985', '2000', '2015'],
                 datasets: [{
                     label: 'Taux de décès',
-                    data: generateRandomData(70, 90),
-                    backgroundColor: '#0074D9'
+                    data: [11.9, 25.5, 36.2],
+                    backgroundColor: '#F074D91'
                 }]
             }
         },
         France: {
-            label: 'France',
+            label: `Taux de prévalence de l'obésité chez les adultes en France`,
             data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                labels: ['1985', '2000', '2015'],
                 datasets: [{
                     label: 'Taux de décès',
-                    data: generateRandomData(50, 70),
+                    data: [8.8, 15.8, 21.6],
                     backgroundColor: '#FF4136'
                 }]
             }
         },
         Fiji: {
-            label: 'Fidji',
+            label: `Taux de prévalence de l'obésité chez les adultes au Fidji`,
             data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                labels: ['1985', '2000', '2015'],
                 datasets: [{
                     label: 'Taux de décès',
-                    data: generateRandomData(40, 60),
+                    data: [9.5, 21, 30.2],
                     backgroundColor: '#2ECC40'
                 }]
             }
         },
         Japan: {
-            label: 'Japon',
+            label: `Taux de prévalence de l'obésité chez les adultes au Japon`,
             data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                labels: ['1985', '2000', '2015'],
                 datasets: [{
                     label: 'Taux de décès',
-                    data: generateRandomData(20, 40),
+                    data: [1, 2.1, 4.3],
                     backgroundColor: '#FF851B'
                 }]
             }
         },
         UK: {
-            label: 'Royaume-Uni',
+            label: `Taux de prévalence de l'obésité chez les adultes au Royaume-Uni`,
             data: {
-                labels: ['Janvier', 'Mars', 'Mai', 'Juillet', 'Septembre', 'Novembre'],
+                labels: ['1985', '2000', '2015'],
                 datasets: [{
                     label: 'Taux de décès',
-                    data: generateRandomData(60, 80),
+                    data: [9.4, 18.6, 27.8],
                     backgroundColor: '#B10DC9'
                 }]
             }
