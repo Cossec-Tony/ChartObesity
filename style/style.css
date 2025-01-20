@@ -11,7 +11,7 @@
 
 body {
     background-color: rgb(240, 234, 223);
-    font-family: 'Poppins', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 header {
@@ -228,10 +228,11 @@ footer {
 
 #titleposter{
     color: black;
-    text-align: center;
-    margin-top: 70px;
+    margin-top: 100px;
     margin-bottom: 50px;
+    margin-left: 50px;
 }
+
 .datalogy{
     display: flex;
     align-items: center;
@@ -811,5 +812,18 @@ footer {
     .validate-button:active,
     .next-button:active {
         transform: scale(0.95);
+    }
+}
+
+/* Amélioration de la performance sur mobile */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .header-content,
+    .chart-container,
+    .burger-container {
+        will-change: transform;
     }
 }
