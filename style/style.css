@@ -461,11 +461,6 @@ footer {
 .footer-logo {
     height: 50px;
     width: auto;
-    transition: transform 0.3s ease;
-}
-
-.footer-logo:hover {
-    transform: translateY(-3px);
 }
 
 .footer-text {
