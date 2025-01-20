@@ -423,3 +423,7 @@ footer {
 .incorrect {
     background-color: rgba(255, 0, 0, 0.2);
 }
+
+#result-gif {
+    margin-top: 25px;
+}
