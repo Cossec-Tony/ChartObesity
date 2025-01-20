@@ -60,6 +60,14 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.texte h2{
+    margin-top: 20px;
+}
+
+.texte p{
+    margin-top: -10px;
+}
+
 h5 {
     color: rgb(240, 234, 223);
     font-size: 1.2rem;
