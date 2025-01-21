@@ -170,6 +170,15 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+    header {
+        justify-content: center;
+    }
+
+    .current-question {
+        font-size: 1rem !important;
+    }
+
     h1 {
         font-size: 2.5rem;
     }
@@ -179,7 +188,8 @@ footer {
     }
 
     .sauce-img {
-        width: 100px;
+        visibility: hidden;
+        display: none;
     }
 
     .fries-container {
@@ -192,6 +202,21 @@ footer {
 
     .flag {
         width: 60px;
+    }
+
+    .fries-img {
+        visibility: hidden;
+        display: none;
+    }
+
+    .footer-text {
+        visibility: hidden;
+        display: none;
+    }
+
+    .burger-container {
+        margin-bottom: 25px;
+        width: 40% !important;
     }
 }
 
