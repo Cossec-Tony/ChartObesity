@@ -618,11 +618,56 @@ footer {
     opacity: 1;
 }
 
-/* Styles de base existants... */
 
-/* Media Queries pour la Responsivité */
+@media (max-width: 1160px) {
+
+    header {
+        justify-content: center;
+    }
+
+    .fries-img {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .datalogy {
+        flex-direction: column;
+        padding: 1rem;
+        align-items: center;
+        text-align-last: center;
+        text-align: justify;
+    }
+
+}
+
+@media (max-width: 1340px) {
+
+    #titleposter {
+        font-size: 3rem;
+        margin: 2rem 1rem;
+        text-align: center;
+    }
+
+    .texte {
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+}
+
+
 @media (max-width: 768px) {
-    /* Header */
+
+    .datalogy {
+        flex-direction: column;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+
+
     header {
         min-height: 300px;
         padding: 1rem;
@@ -652,7 +697,6 @@ footer {
         bottom: -50px;
     }
 
-    /* Drapeaux */
     .flags-section {
         padding: 2rem 1rem;
         gap: 1rem;
@@ -662,7 +706,6 @@ footer {
         width: 50px;
     }
 
-    /* Graphique */
     .chart-container {
         margin: 1rem;
         padding: 0.5rem;
@@ -673,22 +716,11 @@ footer {
         padding: 0 1rem;
     }
 
-    /* Section Datalogy */
-    .datalogy {
-        flex-direction: column;
-        padding: 1rem;
-        align-items: flex-start;
-    }
 
     .poster {
         width: 100%;
         margin-right: 0;
         margin-bottom: 2rem;
-    }
-
-    .texte {
-        font-size: 1rem;
-        text-align: justify;
     }
 
     #titleposter {
@@ -748,7 +780,6 @@ footer {
         font-size: 1.2rem;
     }
 
-    /* Footer */
     .footer {
         padding: 1.5rem 1rem;
     }
@@ -772,7 +803,6 @@ footer {
     }
 }
 
-/* Media Queries pour les très petits écrans */
 @media (max-width: 360px) {
     h1 {
         font-size: 1.8rem;
@@ -795,7 +825,6 @@ footer {
     }
 }
 
-/* Ajustements pour l'orientation paysage sur mobile */
 @media (max-height: 500px) and (orientation: landscape) {
     header {
         min-height: 200px;
@@ -816,7 +845,6 @@ footer {
     }
 }
 
-/* Animations optimisées pour mobile */
 @media (max-width: 768px) {
     .sauce-left:hover,
     .sauce-right:hover,
@@ -844,7 +872,6 @@ footer {
     }
 }
 
-/* Amélioration de la performance sur mobile */
 @media (max-width: 768px) {
     * {
         -webkit-tap-highlight-color: transparent;
