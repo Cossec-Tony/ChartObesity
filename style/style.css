@@ -113,6 +113,66 @@ h5 {
     animation: fadeInUp 0.8s forwards 1s;
 }
 
+.prevention {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    margin: 2rem auto;
+    margin-top: -100px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    font-family: 'Inter', sans-serif;
+}
+
+.prevention h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.prevention p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 1.5rem;
+}
+
+.prevention ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.prevention ul li {
+    background: #fff;
+    margin: 0.8rem 0;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.prevention ul li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.prevention ul li strong {
+    color: #0074D9;
+}
+
+.prevention ul li a {
+    text-decoration: none;
+    color: #0074D9;
+    font-weight: 600;
+}
+
+.prevention ul li a:hover {
+    text-decoration: underline;
+}
+
 footer {
     background-color: rgb(33, 7, 2);
     height: 200px;
