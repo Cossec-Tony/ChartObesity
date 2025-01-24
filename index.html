@@ -351,10 +351,8 @@
         const selectedBurger = document.querySelector(`.burger-container[data-index="${selectedBurgerIndex}"]`);
         const correct = questions[currentQuestion].answers[selectedBurgerIndex].correct;
 
-        // Add correct/incorrect class
         selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
 
-        // Show feedback
         const feedback = document.getElementById('feedback');
         if (correct) {
             feedback.textContent = "Correct ! 🎉";
@@ -364,7 +362,6 @@
             feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
         }
 
-        // Hide validate button and show next button
         document.getElementById('validate-button').style.display = 'none';
         document.getElementById('next-button').style.display = 'block';
     }
@@ -392,7 +389,6 @@
         }
     }
 
-    // Add event listeners
     document.getElementById('validate-button').addEventListener('click', validateAnswer);
     document.getElementById('next-button').addEventListener('click', () => {
         currentQuestion++;
@@ -403,7 +399,7 @@
         }
     });
 
-    // Start the quiz
+    //Commmence le quizz
     displayQuestion(0);
 
 
