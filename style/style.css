@@ -33,6 +33,10 @@ header {
     animation: fadeInDown 0.8s forwards;
 }
 
+a {
+    color: white;
+}
+
 .sauce-img {
     width: 140px;
     height: auto;
